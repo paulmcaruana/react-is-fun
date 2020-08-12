@@ -1,17 +1,49 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React, { Component } from 'react'
+import { render } from 'react-dom'
 
-var style = {
-  backgroundColor: 'orange',
-  color: 'white',
-  fontFamily: 'Arial'
+let skiData = {
+  total: 50,
+  powder: 20,
+  backcountry: 10,
+  goal: 100
+}
+
+const getPercent = decimal => {
+  return decimal * 100 + '%'
+}
+const calcGoalProgress = (total, goal) => {
+  return getPercent(total/goal)
+}
+
+const SkiDayCounter = ({total, powder, backcountry, goal}) => {
+  return (
+    <section>
+        <div>
+          <p>Total Days: {total}</p>
+        </div>
+
+        <div>
+          <p>Powder Days: {powder}</p>
+        </div>
+
+        <div>
+          <p>Backcountry Days: {backcountry}</p>
+        </div>
+
+        <div>
+          <p>Goal Progress: {calcGoalProgress(total, goal)}</p>
+        </div>
+        
+      </section>
+  )
 }
 
 
-ReactDOM.render(
-  <div style={style}> 
-    <h1 id="heading-element">Hello World!</h1>
-    <p>We're glad you are here!</p>
-  </div>, 
+render(
+  <SkiDayCounter 
+    total={skiData.total}
+    powder={skiData.powder}
+    backcountry={skiData.backcountry}
+    goal={skiData.goal}/>, 
   document.getElementById('root')
 )
